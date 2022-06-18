@@ -1,0 +1,64 @@
+﻿@model IEnumerable<SWAPIWebApp_IntelliQ.Models.Person>
+@using System.Text.RegularExpressions;
+
+@{
+    ViewData["Title"] = "People";
+}
+
+<h2>@ViewBag.Message</h2>
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="form-horizontal">
+    <div class="form-group center">
+        <br />
+        <h2 class="card-title">List of People</h2>
+        <table class="table border">
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Height
+                </th>
+                <th>
+                    Mass
+                </th>
+                <th>
+                    More Info
+                </th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <b>@Regex.Replace(item.Url, "[^0-9]", "")</b>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Regex.Replace(item.Height, "unknown", "???")
+                    </td>
+                    <td>
+                        @Regex.Replace(item.Mass, "unknown", "???")
+                    </td>
+                    <td>
+                        <a class="btn" asp-controller="Details" asp-action="Details" asp-route-Url="@item.Url">View</a>
+                    </td>
+                </tr>
+            }
+        </table>
+        <div class="vertical-center">
+            <button id="prev" href="#" class="btn" onclick="prevPage()">&laquo;</button>
+            <strong id="default">1</strong>
+            <strong>@Regex.Replace(Context.Request.QueryString.ToString(), "[^0-9]", "")</strong>
+            <button id="next" href="#" class="btn" onclick="nextPage()">&raquo;</button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/pagination.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,81 @@
+﻿@model dynamic
+@using System.Text.RegularExpressions;
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>@ViewBag.Message</h2>
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div>
+    <div class="form-group vertical-center-details">
+        <h2 class="card-title">#@Regex.Replace(Model.People.Url, "[^0-9]", "") - @Model.People.Name</h2>
+        <table class="table border">
+            <tr>
+                <td>
+                    <Strong>Height: </Strong> @Regex.Replace(Model.People.Height, "unknown", "???") cm
+                </td>
+                <td>
+                    <Strong>Weight: </Strong> @Regex.Replace(Model.People.Mass, "unknown", "???") kg
+                </td>
+            </tr>
+            <tr>
+                <td class="capitalize">
+                    <Strong>Hair Colour: </Strong> @Model.People.HairColor
+                </td>
+                <td class="capitalize">
+                    <Strong>Skin Colour: </Strong> @Model.People.SkinColor
+                </td>
+            </tr>
+            <tr>
+                <td class="capitalize">
+                    <Strong>Eye Colour: </Strong> @Model.People.EyeColor
+                </td>
+                <td>
+                    <Strong>Homeworld: </Strong> @Model.Homeworld.Name
+                </td>
+            </tr>
+            <tr>
+                <td class="capitalize">
+                    <Strong>Gender: </Strong> @Model.People.Gender
+                </td>
+                <td>
+                    <Strong>Birth Year: </Strong> @Model.People.BirthYear
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <Strong>Films: </Strong>
+                    @foreach (string item in Model.Films)
+                    {
+                        <br>@Html.DisplayFor(modelItem => item)
+                    }
+                </td>
+                <td>
+                    <Strong>Species: </Strong>
+                    @foreach (string item in Model.Species)
+                    {
+                        <br>@Html.DisplayFor(modelItem => item)
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="capitalize">
+                    <Strong>Vehicles: </Strong>
+                    @foreach (string item in Model.Vehicles)
+                    {
+                        <br>@Html.DisplayFor(modelItem => item)
+                    }
+                </td>
+                <td class="capitalize">
+                    <Strong>Starships: </Strong>
+                    @foreach (string item in Model.Starships)
+                    {
+                        <br>@Html.DisplayFor(modelItem => item)
+                    }
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
