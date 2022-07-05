@@ -1,5 +1,5 @@
 # SWAPI-WebApp
-ASP.Net Core MVC test
+ASP.Net Core MVC
 
 ### Planned Improvements:
 - Implement Generics on DetailsController and refactor any other redundant code
